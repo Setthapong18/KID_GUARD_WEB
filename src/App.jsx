@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import ThreePhoneMockup from "./components/ThreePhoneMockup";
+
 
 /* ─── Intersection Observer Hook ─── */
 function useInView(options = {}) {
@@ -342,11 +344,10 @@ function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "glass shadow-lg shadow-sage-900/5 py-3"
-          : "bg-transparent py-5"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
+        ? "glass shadow-lg shadow-sage-900/5 py-3"
+        : "bg-transparent py-5"
+        }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
@@ -449,7 +450,7 @@ function Hero() {
       <div className="absolute bottom-20 left-10 w-96 h-96 bg-sage-300/30 rounded-full blur-3xl" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sage-200/20 rounded-full blur-3xl" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
         {/* Left Content */}
         <div className="text-center lg:text-left">
           <div className="animate-fade-in-up">
@@ -507,17 +508,8 @@ function Hero() {
         </div>
 
         {/* Right: Phone Mockup */}
-        <div className="hidden lg:flex justify-center items-center animate-fade-in-up delay-400">
-          <div className="relative">
-            <div className="absolute -inset-8 bg-gradient-to-br from-sage-300/30 to-sage-500/20 rounded-full blur-2xl animate-pulse-soft" />
-            <div className="relative animate-float">
-              <img
-                src="/assets/MockUP.png"
-                alt="KidGuard App Screenshot"
-                className="w-80 rounded-3xl shadow-2xl shadow-sage-900/20"
-              />
-            </div>
-          </div>
+        <div className="hidden lg:flex justify-center items-center animate-fade-in-up delay-400 lg:pl-10">
+          <ThreePhoneMockup />
         </div>
       </div>
 
@@ -566,9 +558,8 @@ function Features() {
           {FEATURES.map((f, i) => (
             <div
               key={i}
-              className={`group relative p-8 rounded-3xl bg-gradient-to-br from-sage-50 to-white border border-sage-100 hover:border-sage-300 transition-all duration-500 hover:shadow-xl hover:shadow-sage-200/50 hover:-translate-y-2 ${
-                inView ? "animate-fade-in-up" : "opacity-0"
-              }`}
+              className={`group relative p-8 rounded-3xl bg-gradient-to-br from-sage-50 to-white border border-sage-100 hover:border-sage-300 transition-all duration-500 hover:shadow-xl hover:shadow-sage-200/50 hover:-translate-y-2 ${inView ? "animate-fade-in-up" : "opacity-0"
+                }`}
               style={{ animationDelay: `${i * 0.15}s` }}
             >
               {/* Icon */}
@@ -662,21 +653,19 @@ function HowToUse() {
           <div className="flex justify-center gap-3 mb-10">
             <button
               onClick={() => setActiveTab("parent")}
-              className={`px-6 py-3 rounded-2xl font-semibold text-sm transition-all ${
-                activeTab === "parent"
-                  ? "bg-gradient-to-r from-sage-600 to-sage-700 text-white shadow-lg shadow-sage-500/30"
-                  : "bg-white text-sage-600 border border-sage-200 hover:border-sage-400"
-              }`}
+              className={`px-6 py-3 rounded-2xl font-semibold text-sm transition-all ${activeTab === "parent"
+                ? "bg-gradient-to-r from-sage-600 to-sage-700 text-white shadow-lg shadow-sage-500/30"
+                : "bg-white text-sage-600 border border-sage-200 hover:border-sage-400"
+                }`}
             >
               👨‍👩‍👦 ฝั่งผู้ปกครอง
             </button>
             <button
               onClick={() => setActiveTab("child")}
-              className={`px-6 py-3 rounded-2xl font-semibold text-sm transition-all ${
-                activeTab === "child"
-                  ? "bg-gradient-to-r from-sage-600 to-sage-700 text-white shadow-lg shadow-sage-500/30"
-                  : "bg-white text-sage-600 border border-sage-200 hover:border-sage-400"
-              }`}
+              className={`px-6 py-3 rounded-2xl font-semibold text-sm transition-all ${activeTab === "child"
+                ? "bg-gradient-to-r from-sage-600 to-sage-700 text-white shadow-lg shadow-sage-500/30"
+                : "bg-white text-sage-600 border border-sage-200 hover:border-sage-400"
+                }`}
             >
               👶 ฝั่งเด็ก
             </button>
