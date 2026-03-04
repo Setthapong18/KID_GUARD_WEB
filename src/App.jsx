@@ -364,94 +364,90 @@ function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-        ? "glass shadow-lg shadow-sage-900/5 py-3"
-        : "bg-transparent py-5"
+      className={`fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-6xl z-50 transition-all duration-700 ${scrolled
+        ? "glass rounded-[2rem] py-3 px-8 shadow-premium"
+        : "bg-transparent py-5 px-8"
         }`}
     >
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+      <div className="flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-3 group">
-          <img
-            src="/assets/Kid_Guard.png"
-            alt="KidGuard"
-            className="w-10 h-10 rounded-xl shadow-lg shadow-sage-500/30 group-hover:shadow-sage-500/50 transition-shadow"
-          />
-          <span className="text-xl font-bold text-sage-800 tracking-tight">
+          <div className="relative">
+            <img
+              src="/assets/Kid_Guard.png"
+              alt="KidGuard"
+              className="w-10 h-10 rounded-xl shadow-sage-glow group-hover:scale-110 transition-transform duration-500"
+            />
+            <div className="absolute inset-0 bg-sage-500/20 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+          </div>
+          <span className="text-xl font-bold text-sage-900 tracking-tight">
             Kid<span className="text-sage-500">Guard</span>
           </span>
         </a>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-10">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sage-700 hover:text-sage-900 font-medium text-sm transition-colors relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-sage-500 after:transition-all hover:after:w-full"
+              className="text-sage-700 hover:text-sage-900 font-medium text-sm transition-all relative group"
             >
               {l.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sage-500 transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
           <a
-            href="#download"
-            className="bg-gradient-to-r from-sage-600 to-sage-700 hover:from-sage-700 hover:to-sage-800 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-sage-600/25 hover:shadow-sage-700/40 hover:-translate-y-0.5 active:translate-y-0"
+            href="/KidGuard_App.apk"
+            download
+            className="relative overflow-hidden group bg-sage-800 text-white px-6 py-2.5 rounded-2xl text-sm font-semibold transition-all hover:bg-sage-900 hover:shadow-sage-glow hover:-translate-y-0.5"
           >
-            ดาวน์โหลด
+            <span className="relative z-10">ดาวน์โหลด</span>
+            <div className="absolute inset-x-0 bottom-0 h-0 bg-sage-600 transition-all duration-300 group-hover:h-full -z-0" />
           </a>
         </div>
 
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-sage-700 p-2"
+          className="md:hidden text-sage-800 p-2 hover:bg-sage-100 rounded-xl transition-colors"
           aria-label="Toggle menu"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={2}
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            {mobileOpen ? (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18 18 6M6 6l12 12"
-              />
-            ) : (
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            )}
-          </svg>
+          {mobileOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          )}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="md:hidden glass mt-2 mx-4 rounded-2xl p-4 animate-fade-in-up">
-          {links.map((l) => (
+        <div className="md:hidden glass mt-4 rounded-3xl p-6 animate-scale-in border border-white/20">
+          <div className="flex flex-col gap-4">
+            {links.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setMobileOpen(false)}
+                className="text-sage-800 font-semibold text-lg hover:text-sage-600 px-4 py-2"
+              >
+                {l.label}
+              </a>
+            ))}
             <a
-              key={l.href}
-              href={l.href}
+              href="/KidGuard_App.apk"
+              download
               onClick={() => setMobileOpen(false)}
-              className="block py-3 px-4 text-sage-700 hover:text-sage-900 hover:bg-sage-50 rounded-xl font-medium transition-colors"
+              className="mt-2 text-center bg-sage-800 text-white py-4 rounded-2xl font-bold shadow-lg"
             >
-              {l.label}
+              ดาวน์โหลด APK
             </a>
-          ))}
-          <a
-            href="#download"
-            onClick={() => setMobileOpen(false)}
-            className="block mt-2 text-center bg-gradient-to-r from-sage-600 to-sage-700 text-white py-3 rounded-xl font-semibold"
-          >
-            ดาวน์โหลด
-          </a>
+          </div>
         </div>
       )}
     </nav>
@@ -463,79 +459,82 @@ function Navbar() {
    ═══════════════════════════════════════════════════════ */
 function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-sage-50 via-cream-50 to-sage-100" />
-      <div className="absolute top-20 right-10 w-72 h-72 bg-sage-200/40 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-96 h-96 bg-sage-300/30 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-sage-200/20 rounded-full blur-3xl" />
+    <section className="relative min-h-[110vh] flex items-center overflow-hidden pt-32 pb-20">
+      {/* Background with mesh-like blobs */}
+      <div className="absolute inset-0 bg-[#FDFCFA]" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+      {/* Dynamic Blobs */}
+      <div className="absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-sage-100/40 rounded-full blur-[120px] animate-float" />
+      <div className="absolute bottom-[0%] left-[-5%] w-[40vw] h-[40vw] bg-sage-200/30 rounded-full blur-[100px] animate-float" style={{ animationDelay: '-2s' }} />
+      <div className="absolute top-[20%] left-[20%] w-[30vw] h-[30vw] bg-accent-400/20 rounded-full blur-[80px] animate-pulse-soft" />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-8 lg:px-12 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Content */}
         <div className="text-center lg:text-left">
           <div className="animate-fade-in-up">
-            <span className="inline-flex items-center gap-2 bg-sage-100 text-sage-700 px-4 py-2 rounded-full text-sm font-medium mb-6 border border-sage-200">
-              <ShieldIcon />
-              โปรเจคจบ — Parental Control App
+            <span className="inline-flex items-center gap-2 bg-white px-5 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase text-sage-600 border border-sage-100 shadow-sm mb-10">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sage-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-sage-500"></span>
+              </span>
+              Parental Control Redefined
             </span>
           </div>
 
-          <h1 className="animate-fade-in-up delay-100 text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
-            <span className="text-sage-900">ดูแลบุตรหลาน</span>
+          <h1 className="animate-reveal text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.1] mb-10">
+            <span className="text-sage-950 text-gradient-sage">ดูแลบุตรหลาน</span>
             <br />
-            <span className="text-gradient-sage">อย่างอุ่นใจ</span>
+            <span className="text-sage-900">อย่างพรีเมียม</span>
           </h1>
 
-          <p className="animate-fade-in-up delay-200 text-sage-600 text-lg sm:text-xl leading-relaxed mb-8 max-w-lg mx-auto lg:mx-0">
-            KidGuard แอปพลิเคชันที่ช่วยให้ผู้ปกครองดูแลความปลอดภัยของบุตรหลาน
-            ด้วยการติดตามตำแหน่ง จัดการเวลาหน้าจอ และแจ้งเตือนอัจฉริยะ
+          <p className="animate-fade-in-up delay-200 text-sage-600 text-xl lg:text-2xl leading-relaxed mb-12 max-w-xl mx-auto lg:mx-0 font-medium">
+            สัมผัสประสบการณ์การดูแลบุตรหลานยุคใหม่
+            <span className="text-sage-900 block mt-2">ง่าย ปลอดภัย และอัจฉริยะที่สุด</span>
           </p>
 
-          <div className="animate-fade-in-up delay-300 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <div className="animate-fade-in-up delay-300 flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
             <a
-              href="#download"
-              className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-sage-600 to-sage-700 hover:from-sage-700 hover:to-sage-800 text-white px-8 py-4 rounded-2xl text-lg font-bold transition-all shadow-2xl shadow-sage-600/30 hover:shadow-sage-700/50 hover:-translate-y-1 active:translate-y-0"
+              href="/KidGuard_App.apk"
+              download
+              className="group relative overflow-hidden bg-sage-800 text-white px-10 py-5 rounded-[2rem] text-xl font-bold transition-all shadow-premium hover:shadow-sage-glow hover:-translate-y-1"
             >
-              <DownloadIcon className="w-6 h-6 group-hover:animate-bounce" />
-              ดาวน์โหลดฟรี
+              <div className="relative z-10 flex items-center gap-3">
+                <DownloadIcon className="w-7 h-7 group-hover:translate-y-1 transition-transform" />
+                เริ่มต้นใช้งานฟรี
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-sage-600 to-sage-700 opacity-0 group-hover:opacity-100 transition-opacity" />
             </a>
             <a
               href="#features"
-              className="inline-flex items-center justify-center gap-2 bg-white/60 hover:bg-white text-sage-700 px-8 py-4 rounded-2xl text-lg font-semibold transition-all border border-sage-200 hover:border-sage-300 hover:-translate-y-1"
+              className="glass px-10 py-5 rounded-[2rem] text-xl font-bold text-sage-800 hover:bg-white hover:shadow-premium transition-all hover:-translate-y-1 flex items-center gap-2 justify-center"
             >
-              ดูฟีเจอร์
+              สำรวจฟีเจอร์
               <ChevronDown />
             </a>
           </div>
 
-          {/* Stats */}
-          <div className="animate-fade-in-up delay-500 mt-10 flex items-center gap-8 justify-center lg:justify-start">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-sage-800">Android</div>
-              <div className="text-sm text-sage-500">รองรับ</div>
+          {/* New Premium Stats */}
+          <div className="animate-fade-in-up delay-400 mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto lg:mx-0">
+            <div>
+              <div className="text-3xl font-black text-sage-900 leading-none mb-2">100%</div>
+              <div className="text-[10px] font-bold text-sage-400 uppercase tracking-widest">Privacy Secured</div>
             </div>
-            <div className="w-px h-10 bg-sage-200" />
-            <div className="text-center">
-              <div className="text-2xl font-bold text-sage-800">ฟรี</div>
-              <div className="text-sm text-sage-500">ไม่มีค่าใช้จ่าย</div>
+            <div className="border-l border-sage-200 pl-8">
+              <div className="text-3xl font-black text-sage-900 leading-none mb-2">Android</div>
+              <div className="text-[10px] font-bold text-sage-400 uppercase tracking-widest">Full Platform</div>
             </div>
-            <div className="w-px h-10 bg-sage-200" />
-            <div className="text-center">
-              <div className="text-2xl font-bold text-sage-800">ปลอดภัย</div>
-              <div className="text-sm text-sage-500">100%</div>
+            <div className="border-l border-sage-200 pl-8">
+              <div className="text-3xl font-black text-sage-900 leading-none mb-2">FREE</div>
+              <div className="text-[10px] font-bold text-sage-400 uppercase tracking-widest">Open Source</div>
             </div>
           </div>
         </div>
 
-        {/* Right: Phone Mockup */}
-        <div className="hidden lg:flex justify-center items-center animate-fade-in-up delay-400 lg:pl-10">
+        {/* Right Content */}
+        <div className="relative animate-float pt-10 lg:pt-0">
+          <div className="absolute inset-0 bg-sage-500/10 blur-[100px] rounded-full" />
           <ThreePhoneMockup />
         </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce text-sage-400">
-        <ChevronDown />
       </div>
     </section>
   );
@@ -550,52 +549,43 @@ function Features() {
   return (
     <section
       id="features"
-      className="relative py-24 sm:py-32 bg-white"
+      className="relative py-32 bg-white overflow-hidden"
       ref={ref}
     >
-      {/* Decorative */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sage-200 to-transparent" />
+      {/* Soft Background Accent */}
+      <div className="absolute top-0 right-0 w-[30vw] h-[30vw] bg-sage-50 rounded-full blur-[100px] opacity-60" />
 
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-8 relative z-10">
         {/* Header */}
         <div
-          className={`text-center mb-16 ${inView ? "animate-fade-in-up" : "opacity-0"}`}
+          className={`text-center mb-24 ${inView ? "animate-fade-in-up" : "opacity-0"}`}
         >
-          <span className="inline-block bg-sage-100 text-sage-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4 border border-sage-200">
-            ฟีเจอร์หลัก
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-sage-900 mb-4">
-            ทุกสิ่งที่คุณต้องการ
+          <h2 className="text-4xl sm:text-5xl font-black text-sage-950 mb-6 tracking-tight">
+            ฟีเจอร์ที่ออกแบบมา<br /><span className="text-gradient-sage">เพื่อความสบายใจของคุณ</span>
           </h2>
-          <p className="text-sage-500 text-lg max-w-2xl mx-auto">
-            KidGuard
-            มาพร้อมฟีเจอร์ครบครันเพื่อให้ผู้ปกครองดูแลบุตรหลานได้อย่างมั่นใจ
+          <p className="text-sage-500 text-xl max-w-2xl mx-auto font-medium">
+            รวมทุกเทคโนโลยีเพื่อการดูแลบุตรหลานอย่างรอบด้าน ใช้งานง่ายเพียงปลายนิ้วสัมผัส
           </p>
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid sm:grid-cols-2 gap-6">
-          {FEATURES.map((f, i) => (
+        {/* Bento-ish Grid */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {FEATURES.slice(0, 6).map((f, i) => (
             <div
               key={i}
-              className={`group relative p-8 rounded-3xl bg-gradient-to-br from-sage-50 to-white border border-sage-100 hover:border-sage-300 transition-all duration-500 hover:shadow-xl hover:shadow-sage-200/50 hover:-translate-y-2 ${inView ? "animate-fade-in-up" : "opacity-0"
-                }`}
-              style={{ animationDelay: `${i * 0.15}s` }}
+              className={`group card-hover glass p-10 rounded-[2.5rem] border border-sage-100 ${inView ? "animate-fade-in-up" : "opacity-0"
+                } ${i === 0 || i === 4 ? "md:col-span-2" : ""}`}
+              style={{ animationDelay: `${i * 0.1}s` }}
             >
-              {/* Icon */}
-              <div
-                className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${f.color} text-white flex items-center justify-center mb-5 shadow-lg shadow-sage-500/20 group-hover:scale-110 transition-transform duration-300`}
-              >
+              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${f.color} text-white flex items-center justify-center mb-10 shadow-lg group-hover:rotate-6 transition-transform`}>
                 {f.icon}
               </div>
-
-              <h3 className="text-xl font-bold text-sage-800 mb-3">
+              <h3 className="text-2xl font-bold text-sage-900 mb-4 tracking-tight">
                 {f.title}
               </h3>
-              <p className="text-sage-500 leading-relaxed">{f.desc}</p>
-
-              {/* Hover glow */}
-              <div className="absolute -inset-px rounded-3xl bg-gradient-to-br from-sage-200/0 to-sage-300/0 group-hover:from-sage-200/20 group-hover:to-sage-300/20 transition-all duration-500 -z-10" />
+              <p className="text-sage-600 text-lg leading-relaxed font-medium">
+                {f.desc}
+              </p>
             </div>
           ))}
         </div>
@@ -614,47 +604,44 @@ function HowToUse() {
   return (
     <section
       id="how-to-use"
-      className="relative py-24 sm:py-32 bg-gradient-to-br from-sage-50 via-cream-50 to-sage-100"
+      className="relative py-32 bg-gradient-to-br from-sage-50 via-white to-sage-100/30"
       ref={ref}
     >
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-8">
         {/* Header */}
         <div
-          className={`text-center mb-16 ${inView ? "animate-fade-in-up" : "opacity-0"}`}
+          className={`text-center mb-24 ${inView ? "animate-fade-in-up" : "opacity-0"}`}
         >
-          <span className="inline-block bg-white text-sage-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4 border border-sage-200 shadow-sm">
-            เริ่มต้นง่ายๆ
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-sage-900 mb-4">
-            วิธีการใช้งาน
+          <h2 className="text-4xl sm:text-5xl font-black text-sage-950 mb-6">
+            เริ่มต้นดูแล<br /><span className="text-gradient-sage">ใน 3 ขั้นตอนง่ายๆ</span>
           </h2>
-          <p className="text-sage-500 text-lg max-w-2xl mx-auto">
-            3 ขั้นตอนง่ายๆ ในการเริ่มใช้ KidGuard ดูแลบุตรหลานของคุณ
+          <p className="text-sage-500 text-xl max-w-2xl mx-auto font-medium">
+            ติดตั้งง่าย ไม่ยุ่งยาก พร้อมระบบความปลอดภัยระดับพรีเมียม
           </p>
         </div>
 
         {/* Quick Start Steps */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
+        <div className="grid md:grid-cols-3 gap-12 mb-32">
           {STEPS.map((s, i) => (
             <div
               key={i}
-              className={`relative ${inView ? "animate-fade-in-up" : "opacity-0"}`}
+              className={`relative group ${inView ? "animate-fade-in-up" : "opacity-0"}`}
               style={{ animationDelay: `${i * 0.2}s` }}
             >
               {i < STEPS.length - 1 && (
-                <div className="hidden md:block absolute top-16 left-[60%] w-[80%] h-px bg-gradient-to-r from-sage-300 to-sage-200" />
+                <div className="hidden md:block absolute top-20 left-[70%] w-full h-[2px] bg-gradient-to-r from-sage-200 to-transparent -z-10" />
               )}
-              <div className="relative glass rounded-3xl p-8 text-center hover:shadow-xl hover:shadow-sage-200/30 transition-all duration-500 hover:-translate-y-2 group">
-                <div className="absolute -top-4 -right-2 w-10 h-10 bg-gradient-to-br from-sage-500 to-sage-700 rounded-xl flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-sage-500/30 rotate-3 group-hover:rotate-0 transition-transform">
+              <div className="bg-white rounded-[3rem] p-12 text-center shadow-premium group-hover:shadow-sage-glow transition-all duration-500 hover:-translate-y-3 border border-sage-50">
+                <div className="absolute top-8 left-8 w-12 h-12 bg-sage-900 rounded-2xl flex items-center justify-center text-white text-xl font-black rotate-[-10deg] group-hover:rotate-0 transition-transform">
                   {s.step}
                 </div>
-                <div className="w-16 h-16 mx-auto bg-gradient-to-br from-sage-100 to-sage-200 rounded-2xl flex items-center justify-center text-sage-600 mb-5 group-hover:scale-110 transition-transform shadow-sm">
+                <div className="w-24 h-24 mx-auto bg-sage-50 rounded-[2rem] flex items-center justify-center text-sage-600 mb-8 group-hover:scale-110 transition-transform shadow-inner">
                   {s.icon}
                 </div>
-                <h3 className="text-xl font-bold text-sage-800 mb-3">
+                <h3 className="text-2xl font-black text-sage-900 mb-4">
                   {s.title}
                 </h3>
-                <p className="text-sage-500 leading-relaxed text-sm">
+                <p className="text-sage-500 leading-relaxed font-medium">
                   {s.desc}
                 </p>
               </div>
@@ -664,86 +651,82 @@ function HowToUse() {
 
         {/* Detailed Guide — Parent / Child Tabs */}
         <div className={inView ? "animate-fade-in-up delay-400" : "opacity-0"}>
-          <h3 className="text-center text-2xl sm:text-3xl font-bold text-sage-900 mb-3">
-            คู่มือการใช้งานละเอียด
-          </h3>
-          <p className="text-center text-sage-500 mb-8">
-            เลือกบทบาทเพื่อดูขั้นตอนการตั้งค่า
-          </p>
+          <div className="glass max-w-5xl mx-auto rounded-[3.5rem] p-12 border border-white/60 shadow-premium">
+            <h3 className="text-center text-3xl font-black text-sage-950 mb-4">
+              คู่มือการใช้งานเชิงลึก
+            </h3>
+            <p className="text-center text-sage-500 text-lg mb-12 font-medium">
+              เลือกบทบาทเพื่อดูวิธีการตั้งค่าอย่างละเอียด
+            </p>
 
-          {/* Tab Buttons */}
-          <div className="flex justify-center gap-3 mb-10">
-            <button
-              onClick={() => setActiveTab("parent")}
-              className={`px-6 py-3 rounded-2xl font-semibold text-sm transition-all flex items-center gap-2 ${activeTab === "parent"
-                ? "bg-gradient-to-r from-sage-600 to-sage-700 text-white shadow-lg shadow-sage-500/30"
-                : "bg-white text-sage-600 border border-sage-200 hover:border-sage-400"
-                }`}
-            >
-              <UsersIcon /> สำหรับผู้ปกครอง
-            </button>
-            <button
-              onClick={() => setActiveTab("child")}
-              className={`px-6 py-3 rounded-2xl font-semibold text-sm transition-all flex items-center gap-2 ${activeTab === "child"
-                ? "bg-gradient-to-r from-sage-600 to-sage-700 text-white shadow-lg shadow-sage-500/30"
-                : "bg-white text-sage-600 border border-sage-200 hover:border-sage-400"
-                }`}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm6 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Z" />
-              </svg>
-              สำหรับเด็ก
-            </button>
-          </div>
+            {/* Tab Buttons */}
+            <div className="flex justify-center gap-4 mb-16">
+              <button
+                onClick={() => setActiveTab("parent")}
+                className={`px-10 py-5 rounded-[2rem] font-bold text-lg transition-all flex items-center gap-3 ${activeTab === "parent"
+                  ? "bg-sage-900 text-white shadow-xl translate-y-[-4px]"
+                  : "bg-sage-50 text-sage-600 hover:bg-sage-100"
+                  }`}
+              >
+                <UsersIcon /> ผู้ปกครอง
+              </button>
+              <button
+                onClick={() => setActiveTab("child")}
+                className={`px-10 py-5 rounded-[2rem] font-bold text-lg transition-all flex items-center gap-3 ${activeTab === "child"
+                  ? "bg-sage-900 text-white shadow-xl translate-y-[-4px]"
+                  : "bg-sage-50 text-sage-600 hover:bg-sage-100"
+                  }`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm6 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Z" />
+                </svg>
+                บุตรหลาน
+              </button>
+            </div>
 
-          {/* Tab Content */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
-            {(activeTab === "parent" ? PARENT_STEPS : CHILD_STEPS).map(
-              (item, i) => (
-                <div
-                  key={`${activeTab}-${i}`}
-                  className="glass rounded-2xl p-6 hover:shadow-lg hover:shadow-sage-200/30 transition-all duration-300 hover:-translate-y-1 group"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sage-100 to-sage-200 flex items-center justify-center text-sage-600 group-hover:scale-110 transition-transform">
-                      {item.icon}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-sage-400">
-                        STEP {String(i + 1).padStart(2, "0")}
+            {/* Tab Content */}
+            <div className="grid sm:grid-cols-2 gap-6">
+              {(activeTab === "parent" ? PARENT_STEPS : CHILD_STEPS).map(
+                (item, i) => (
+                  <div
+                    key={`${activeTab}-${i}`}
+                    className="bg-white/50 p-8 rounded-[2rem] border border-sage-100 hover:bg-white hover:shadow-premium transition-all duration-300 group"
+                  >
+                    <div className="flex items-center gap-5 mb-5">
+                      <div className="w-14 h-14 rounded-2xl bg-sage-50 flex items-center justify-center text-sage-700 group-hover:scale-110 transition-transform group-hover:bg-sage-900 group-hover:text-white">
+                        {item.icon}
+                      </div>
+                      <span className="text-xs font-black text-sage-400 uppercase tracking-widest">
+                        Step {i + 1}
                       </span>
                     </div>
+                    <h4 className="text-xl font-black text-sage-900 mb-3">{item.title}</h4>
+                    <p className="text-sage-600 leading-relaxed font-medium">
+                      {item.desc}
+                    </p>
                   </div>
-                  <h4 className="font-bold text-sage-800 mb-2">{item.title}</h4>
-                  <p className="text-sage-500 text-sm leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              ),
-            )}
+                ),
+              )}
+            </div>
           </div>
         </div>
 
         {/* Permission Notice */}
         <div
-          className={`mt-16 glass rounded-2xl p-6 max-w-2xl mx-auto ${inView ? "animate-fade-in-up delay-600" : "opacity-0"}`}
+          className={`mt-24 glass rounded-[2.5rem] p-10 max-w-3xl mx-auto border-amber-100/50 ${inView ? "animate-fade-in-up delay-600" : "opacity-0"}`}
         >
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center flex-shrink-0 text-amber-600">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
+          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-8 text-center sm:text-left">
+            <div className="w-20 h-20 rounded-[2rem] bg-amber-50 flex items-center justify-center flex-shrink-0 text-amber-500 shadow-inner">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor" className="w-10 h-10">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
               </svg>
             </div>
             <div>
-              <h4 className="font-bold text-sage-800 mb-1">
+              <h4 className="text-2xl font-black text-sage-900 mb-3">
                 การอนุญาตติดตั้ง APK
               </h4>
-              <p className="text-sage-500 text-sm leading-relaxed">
-                เนื่องจากแอปยังไม่ได้อยู่บน Play Store ในครั้งแรกที่ติดตั้ง
-                อุปกรณ์จะขออนุญาตให้ "ติดตั้งจากแหล่งที่ไม่รู้จัก" (Unknown
-                Sources) ไปที่{" "}
-                <strong>ตั้งค่า → ความปลอดภัย → แหล่งที่ไม่รู้จัก</strong>{" "}
-                แล้วเปิดใช้งาน
+              <p className="text-sage-600 text-lg leading-relaxed font-medium">
+                เนื่องจากแอปยังไม่ได้อยู่บน Play Store กรุณาเปิดอนุญาตให้ <span className="text-sage-900 font-bold">"ติดตั้งจากแหล่งที่ไม่รู้จัก"</span> ในส่วนของ <span className="bg-amber-100 px-2 rounded-md font-bold">ตั้งค่า → ความปลอดภัย</span> เพื่อเริ่มใช้งาน
               </p>
             </div>
           </div>
@@ -756,294 +739,333 @@ function HowToUse() {
 /* ═══════════════════════════════════════════════════════
    DOWNLOAD SECTION
    ═══════════════════════════════════════════════════════ */
-function DownloadSection() {
+function Footer() {
   const [ref, inView] = useInView();
+  const [selectedMember, setSelectedMember] = useState(null);
+
+  // Lock scroll when modal is open
+  useEffect(() => {
+    if (selectedMember) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [selectedMember]);
 
   return (
-    <section
+    <footer
       id="about-project"
-      className="relative py-24 sm:py-32 bg-gradient-to-br from-sage-800 via-sage-900 to-sage-950 overflow-hidden"
+      className="relative pt-32 pb-0 bg-sage-950 overflow-hidden"
       ref={ref}
     >
-      {/* Decorative */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-sage-600/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-sage-500/10 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-sage-700/5 rounded-full blur-3xl" />
+      {/* Background Decor */}
+      <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-sage-900 rounded-full blur-[150px] opacity-20" />
+      <div className="absolute bottom-0 left-0 w-[40vw] h-[40vw] bg-sage-800 rounded-full blur-[120px] opacity-10" />
 
-      <div className="relative z-10 max-w-5xl mx-auto px-6">
-        {/* ─── Project Credits ─── */}
+      {/* Developer Modal */}
+      {selectedMember && (
         <div
-          className={`${inView ? "animate-fade-in-up delay-500" : "opacity-0"}`}
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in"
+          onClick={() => setSelectedMember(null)}
         >
-          <h3 className="text-center text-2xl sm:text-3xl font-bold text-white mb-2">
-            เกี่ยวกับโปรเจกต์
-          </h3>
-          <p className="text-center text-sage-400 mb-12">
-            โปรเจกต์จบการศึกษา — สาขาเทคโนโลยีสารสนเทศและการสื่อสารดิจิทัล
-          </p>
+          <div
+            className="bg-sage-900 border border-white/10 rounded-[2.5rem] w-full max-w-lg overflow-hidden animate-fade-in-up shadow-2xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-6 right-6 w-10 h-10 rounded-xl bg-black/20 text-white flex items-center justify-center hover:bg-black/40 border border-white/10 transition-all z-20 group"
+              onClick={() => setSelectedMember(null)}
+            >
+              <svg className="w-5 h-5 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
 
-          {/* Team Members — Full Width Top Row */}
-          <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-sage-700/30 hover:border-sage-500/40 transition-colors mb-8">
-            <div className="flex items-center gap-3 mb-8 justify-center">
-              <div className="w-10 h-10 rounded-xl bg-sage-600/30 flex items-center justify-center text-sage-300">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-                </svg>
-              </div>
-              <h4 className="text-lg font-bold text-white tracking-wide">ทีมผู้พัฒนาแอปพลิเคชัน</h4>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-              {[
-                { name: "นางสาว ปัณฑารีย์ ภูมิพลับ", img: "/assets/1.jpg" },
-                { name: "นาย เศรษฐพงษ์ ป้อมรุ่ง", img: "/assets/2.png" },
-                { name: "นาย อรรถพล ดอกไม้", img: "/assets/3.png" },
-              ].map((member, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col items-center text-center group"
-                >
-                  <div className="relative mb-4">
-                    <div className="absolute -inset-1.5 bg-gradient-to-br from-sage-400 to-sage-600 rounded-2xl opacity-40 group-hover:opacity-70 blur-md transition-opacity" />
-                    <img
-                      src={member.img}
-                      alt={member.name}
-                      className="relative w-32 h-32 rounded-2xl object-cover ring-3 ring-sage-500/60 group-hover:ring-sage-400 transition-all"
-                    />
-                  </div>
-                  <p className="text-sage-200 font-medium text-sm">
-                    {member.name}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Advisors */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-sage-700/30 hover:border-sage-500/40 transition-colors">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-sage-600/30 flex items-center justify-center text-sage-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.425 4.755 4.115 4.115 0 0 0 3.843 5.372 4.115 4.115 0 0 0 3.843-5.372 50.636 50.636 0 0 0-2.425-4.755m15.482 0a50.636 50.636 0 0 1 2.425 4.755 4.115 4.115 0 0 1-3.843 5.372 4.115 4.115 0 0 1-3.843-5.372 50.636 50.636 0 0 1 2.425-4.755m-15.482 0a50.636 50.636 0 0 1 2.425 4.755 4.115 4.115 0 0 1-3.843 5.372 4.115 4.115 0 0 1-3.843-5.372 50.636 50.636 0 0 1 2.425-4.755m-15.482 0L12 2.25l10.125 7.897" />
-                  </svg>
-                </div>
-                <h4 className="text-lg font-bold text-white">อาจารย์ที่ปรึกษา</h4>
-              </div>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white flex-shrink-0 mt-0.5">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-4 h-4"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-sage-200 font-medium">
-                      ผศ. ไกรมน มณีศิลป์
-                    </p>
-                    <p className="text-sage-500 text-sm">
-                      อาจารย์ที่ปรึกษาหลัก
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-sage-300 to-sage-500 flex items-center justify-center text-white flex-shrink-0 mt-0.5">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-4 h-4"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-sage-200 font-medium">
-                      ผศ. พัฒน์นรี จันทราภิรมย์
-                    </p>
-                    <p className="text-sage-500 text-sm">
-                      อาจารย์ที่ปรึกษาร่วม
-                    </p>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            {/* University */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-sage-700/30 hover:border-sage-500/40 transition-colors">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-sage-600/30 flex items-center justify-center text-sage-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
-                  </svg>
-                </div>
-                <h4 className="text-lg font-bold text-white">สถาบันการศึกษา</h4>
-              </div>
-              <div className="space-y-3">
-                <div>
-                  <p className="text-sage-500 text-xs uppercase tracking-wider mb-1">
-                    มหาวิทยาลัย
-                  </p>
-                  <p className="text-sage-200 font-medium">
-                    มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sage-500 text-xs uppercase tracking-wider mb-1">
-                    คณะ
-                  </p>
-                  <p className="text-sage-200 font-medium">
-                    วิทยาศาสตร์และเทคโนโลยี
-                  </p>
-                </div>
-                <div>
-                  <p className="text-sage-500 text-xs uppercase tracking-wider mb-1">
-                    สาขาวิชา
-                  </p>
-                  <p className="text-sage-200 font-medium">
-                    เทคโนโลยีสารสนเทศและการสื่อสารดิจิทัล
-                  </p>
+            <div className="relative h-72 sm:h-96">
+              <img src={selectedMember.img} alt={selectedMember.name} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-sage-900 via-sage-900/40 to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8">
+                <h4 className="text-white text-3xl sm:text-4xl font-black mb-2">{selectedMember.name}</h4>
+                <div className="flex items-center gap-3">
+                  <span className="w-2 h-2 bg-sage-500 rounded-full animate-pulse"></span>
+                  <p className="text-sage-400 font-bold text-sm uppercase tracking-widest">{selectedMember.role}</p>
                 </div>
               </div>
             </div>
 
-            {/* Tech Stack */}
-            <div className="bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-sage-700/30 hover:border-sage-500/40 transition-colors md:col-span-2">
-              <div className="flex items-center gap-3 mb-6 justify-center">
-                <div className="w-10 h-10 rounded-xl bg-sage-600/30 flex items-center justify-center text-sage-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-6 h-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 0 1 0 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 0 1 0-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281Z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                  </svg>
-                </div>
-                <h4 className="text-lg font-bold text-white">เครื่องมือที่ใช้พัฒนา</h4>
-              </div>
-              <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
-                {/* Flutter */}
-                <div className="bg-sage-800/50 rounded-2xl p-5 text-center border border-sage-700/30 hover:border-sage-500/30 hover:bg-sage-700/40 transition-all group">
-                  <div className="flex justify-center mb-3">
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-10 h-10 text-[#54C5F8] group-hover:scale-110 transition-transform"
-                      fill="currentColor"
-                    >
-                      <path d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.357zm.014 11.072L7.857 17.53l6.47 6.47H21.7l-6.46-6.468 6.46-6.46h-7.37z" />
-                    </svg>
-                  </div>
-                  <p className="text-sage-200 text-sm font-semibold">Flutter</p>
-                </div>
-
-                {/* Java */}
-                <div className="bg-sage-800/50 rounded-2xl p-5 text-center border border-sage-700/30 hover:border-sage-500/30 hover:bg-sage-700/40 transition-all group">
-                  <div className="flex justify-center mb-3">
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-10 h-10 text-[#E76F00] group-hover:scale-110 transition-transform"
-                      fill="currentColor"
-                    >
-                      <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0 0 .07-.062.09-.118M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.889 4.832 0 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.189-7.627" />
-                    </svg>
-                  </div>
-                  <p className="text-sage-200 text-sm font-semibold">
-                    Java Native
+            <div className="p-8 pt-6 pb-12 overflow-y-auto max-h-[60vh] custom-scrollbar">
+              <div className="space-y-6">
+                {/* BIO Section */}
+                <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                  <h5 className="text-sage-500 text-[10px] font-black uppercase tracking-widest mb-3 opacity-60">ประวัติการทำงาน / บทบาท</h5>
+                  <p className="text-sage-100 leading-relaxed font-medium text-lg">
+                    {selectedMember.bio}
                   </p>
                 </div>
 
-                {/* Firebase */}
-                <div className="bg-sage-800/50 rounded-2xl p-5 text-center border border-sage-700/30 hover:border-sage-500/30 hover:bg-sage-700/40 transition-all group">
-                  <div className="flex justify-center mb-3">
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="w-10 h-10 group-hover:scale-110 transition-transform"
-                      fill="none"
-                    >
-                      <path
-                        d="M3.89 15.673L6.255 1.618a.473.473 0 0 1 .885-.167l2.503 4.68-5.753 9.542z"
-                        fill="#FFC24A"
-                      />
-                      <path
-                        d="M9.456 8.462L3.89 15.673 6.255 1.618a.473.473 0 0 1 .885-.167l2.316 4.33v2.68z"
-                        fill="#FFA712"
-                      />
-                      <path
-                        d="M15.467 8.02l-1.386-1.508.025-.026L11.21 1.28a.48.48 0 0 0-.854.024L3.89 15.672l7.27 4.504a1.44 1.44 0 0 0 1.49.008l7.24-4.493-4.423-7.67z"
-                        fill="#F4BD62"
-                      />
-                      <path
-                        d="M15.467 8.02l-1.386-1.508-4.64 9.17 3.83 2.505a1.44 1.44 0 0 0 1.49.008l7.24-4.493-4.423-7.67-2.111 1.989z"
-                        fill="#FFA50E"
-                      />
-                      <path
-                        d="M15.542 20.158a1.44 1.44 0 0 1-1.49-.009l-7.233-4.477-.93 1.544 8.097 5.02a1.44 1.44 0 0 0 1.49-.008l7.24-4.494-.937-1.546-6.237 3.97z"
-                        fill="#F6820C"
-                      />
-                      <path
-                        d="M3.89 15.673l.07-.127.863-1.428 5.633-7.656L8.14 1.475a.473.473 0 0 0-.885.167L3.89 15.673z"
-                        fill="#FDE068"
-                      />
-                      <path
-                        d="M9.44 18.192l-.018-.034L3.89 15.674l-.93 1.543 6.446 3.993.037-.015-.003-3.003z"
-                        fill="#FCCA3F"
-                      />
-                      <path
-                        d="M15.542 20.158l6.237-3.97.937 1.546-7.24 4.494a1.44 1.44 0 0 1-1.49.008L6.96 17.216l.864-1.424 6.228 3.857a1.44 1.44 0 0 0 1.49.509z"
-                        fill="#EEAB37"
-                      />
-                    </svg>
+                {/* Personal Info Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="p-5 rounded-2xl bg-white/5 border border-white/5">
+                    <h5 className="text-sage-500 text-[9px] font-black uppercase tracking-widest mb-1 opacity-60">รหัสประจำตัว</h5>
+                    <p className="text-white font-bold">{selectedMember.details?.studentId}</p>
                   </div>
-                  <p className="text-sage-200 text-sm font-semibold">
-                    Firebase
-                  </p>
+                  <div className="p-5 rounded-2xl bg-white/5 border border-white/5">
+                    <h5 className="text-sage-500 text-[9px] font-black uppercase tracking-widest mb-1 opacity-60">วันเกิด</h5>
+                    <p className="text-white font-bold">{selectedMember.details?.birthDate}</p>
+                  </div>
+                </div>
+
+                {/* Education */}
+                <div className="p-6 rounded-2xl bg-white/5 border border-white/5">
+                  <h5 className="text-sage-500 text-[10px] font-black uppercase tracking-widest mb-3 opacity-60">ประวัติการศึกษา</h5>
+                  <p className="text-sage-200 text-sm leading-relaxed">{selectedMember.details?.education}</p>
+                </div>
+
+                {/* Contact & Address */}
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="p-5 rounded-2xl bg-white/5 border border-white/5">
+                    <h5 className="text-sage-500 text-[9px] font-black uppercase tracking-widest mb-3 opacity-60">ข้อมูลการติดต่อ</h5>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-3 text-sage-200 text-sm">
+                        <svg className="w-4 h-4 text-sage-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                        {selectedMember.details?.phone}
+                      </div>
+                      <div className="flex items-center gap-3 text-sage-200 text-sm">
+                        <svg className="w-4 h-4 text-sage-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        {selectedMember.details?.email}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-5 rounded-2xl bg-white/5 border border-white/5">
+                    <h5 className="text-sage-500 text-[9px] font-black uppercase tracking-widest mb-1 opacity-60">ที่อยู่ปัจจุบัน</h5>
+                    <p className="text-sage-200 text-sm leading-relaxed">{selectedMember.details?.address}</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
+      )}
 
-/* ═══════════════════════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════════════════════ */
-function Footer() {
-  return (
-    <footer className="bg-sage-950 text-sage-400 py-10 border-t border-sage-900">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <img
-              src="/assets/Kid_Guard.png"
-              alt="KidGuard"
-              className="w-8 h-8 rounded-lg"
-            />
-            <span className="text-sage-300 font-semibold">
-              Kid<span className="text-sage-500">Guard</span>
-            </span>
+      <div className="relative z-10 max-w-6xl mx-auto px-8">
+        <div className={`text-center mb-16 ${inView ? "animate-fade-in-up" : "opacity-0"}`}>
+          <h3 className="text-3xl sm:text-4xl font-black text-white mb-4">เกี่ยวกับโปรเจกต์</h3>
+          <p className="text-sage-400 font-medium max-w-2xl mx-auto">
+            โปรเจกต์จบการศึกษา — สาขาเทคโนโลยีสารสนเทศและการสื่อสารดิจิทัล
+            คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี
+          </p>
+        </div>
+
+        {/* 1. Team Members — Full Width */}
+        <div className={`mb-12 ${inView ? "animate-fade-in-up delay-100" : "opacity-0"}`}>
+          <div className="bg-white/5 backdrop-blur-md rounded-[2.5rem] p-10 border border-white/10">
+            <h4 className="text-white text-xl font-bold mb-10 text-center flex items-center justify-center gap-4">
+              <span className="w-12 h-px bg-sage-500/30"></span>
+              ทีมผู้พัฒนาแอปพลิเคชัน
+              <span className="w-12 h-px bg-sage-500/30"></span>
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-12">
+              {[
+                {
+                  name: "นางสาว ปัณฑารีย์ ภูมิพลับ",
+                  img: "/assets/1.jpg",
+                  role: "UI/UX & จัดทำรายงาน",
+                  details: {
+                    major: "สาขาเทคโนโลยีคอมพิวเตอร์",
+                    studentId: "116510906072-3",
+                    birthDate: "02 ตุลาคม พ.ศ. 2546",
+                    education: "ศึกษาต่อระดับปริญญาตรีในปีพ.ศ. 2565 สาขาเทคโนโลยีสารสนเทศและการสื่อสารดิจิทัล คณะวิทยาศาสตร์และเทคโนโลยีมหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี (จบการศึกษาระดับมัธยมศึกษา ในปีการศึกษา พ.ศ. 2565 โรงเรียนพระนารายณ์จังหวัด ลพบุรี)",
+                    address: "6/2 หมู่ที่ 3 ต.วังจั่น อ.โคกสำโรง จ.ลพบุรี 15120",
+                    phone: "064-783-9269",
+                    email: "panthareepmp@gmail.com"
+                  },
+                  bio: "รับผิดชอบการออกแบบ User Interface (UI) และ User Experience (UX) ทั้งหมดของระบบ รวมถึงภาระหน้าที่ในการจัดทำสไลด์นำเสนอ ตรวจทานรายงานทางวิชาการ และเป็นผู้ตรวจสอบความเรียบร้อย (Quality Check) เพื่อให้ตัวแอปพลิเคชันมีความถูกต้องและสมบูรณ์ที่สุด"
+                },
+                {
+                  name: "นาย เศรษฐพงษ์ ป้อมรุ่ง",
+                  img: "/assets/2.png",
+                  role: "Full-stack Developer & Database",
+                  details: {
+                    major: "สาขาเทคโนโลยีคอมพิวเตอร์",
+                    studentId: "116510906076-4",
+                    birthDate: "18 มีนาคม พ.ศ. 2547",
+                    education: "ศึกษาต่อระดับปริญญาตรี ในปี พ.ศ. 2565 สาขาเทคโนโลยีสารสนเทศและการสื่อสารดิจิทัล คณะวิทยาศาสตร์และเทคโนโลยีมหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี (จบการศึกษาระดับมัธยมศึกษา ในปีการศึกษา พ.ศ. 2565 โรงเรียนหนองแค “สรกิจพิทยา” จังหวัด สระบุรี)",
+                    address: "18/8 หมู่ 7 ตำบล กุ่มหัก อำเภอ หนองแค จังหวัด สระบุรี 18140",
+                    phone: "098-621-7686",
+                    email: "setthapongc@gmail.com"
+                  },
+                  bio: "รับผิดชอบการพัฒนาแบบ Full-stack ทั้งในส่วนของ Frontend และ Backend รวมถึงการออกแบบและวางรากฐานระบบฐานข้อมูลทั้งหมดเพื่อให้ระบบสามารถทำงานประสานกันได้อย่างมีประสิทธิภาพและมีความเสถียรสูงสุด"
+                },
+                {
+                  name: "นาย อรรถพล ดอกไม้",
+                  img: "/assets/3.png",
+                  role: "Full-stack Developer & SDET",
+                  details: {
+                    major: "สาขาเทคโนโลยีสารสนเทศและการสื่อสารดิจิทัล",
+                    studentId: "116510906077-2",
+                    birthDate: "18 สิงหาคม พ.ศ. 2546",
+                    education: "ศึกษาต่อระดับปริญญาตรีในปี พ.ศ. 2565 สาขาเทคโนโลยีสารสนเทศและการสื่อสารดิจิทัล คณะวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี (จบการศึกษาระดับมัธยมศึกษา ในปีการศึกษา พ.ศ. 2565 โรงเรียนนวมินทราชูทิศ กรุงเทพมหานคร จังหวัดกรุงเทพมหานคร)",
+                    address: "115/218 ซอยนวมินทร์ 163 แยก 15-12 ถนนนวมินทร์ แขวงนวลจันทร์ เขตบึงกุ่ม กทม. 10230",
+                    phone: "063-321-6187",
+                    email: "atthapolarm254605@gmail.com"
+                  },
+                  bio: "รับผิดชอบการพัฒนาแบบ Full-stack ทั้งในส่วนของ Frontend และ Backend พร้อมควบตำแหน่ง SDET (Software Development Engineer in Test) โดยเน้นการตรวจสอบความถูกต้องเรียบร้อยและวิเคราะห์บัคของแอปพลิเคชัน เพื่อให้ระบบมีความเสถียรและมอบประสบการณ์การใช้งานที่สมบูรณ์แบบที่สุด"
+                },
+              ].map((m, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col items-center group cursor-pointer"
+                  onClick={() => setSelectedMember(m)}
+                >
+                  <div className="relative mb-6">
+                    <div className="absolute -inset-2 bg-gradient-to-br from-sage-500 to-sage-700 rounded-[2rem] opacity-0 group-hover:opacity-40 blur-xl transition-all duration-500" />
+                    <img
+                      src={m.img}
+                      alt={m.name}
+                      className="relative w-32 h-32 rounded-[2rem] object-cover ring-2 ring-white/10 group-hover:ring-sage-500/50 transition-all duration-500 shadow-lg"
+                    />
+                    <div className="absolute inset-0 bg-sage-500/10 rounded-[2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <svg className="w-8 h-8 text-white scale-75 group-hover:scale-100 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <h5 className="text-white font-bold text-lg mb-1 group-hover:text-sage-400 transition-colors">{m.name}</h5>
+                  <p className="text-sage-600 text-[10px] uppercase tracking-widest font-black opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">คลิกเพื่อดูประวัติ</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* 2. Advisors & University — Side by Side */}
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
+          {/* Advisors */}
+          <div className={`bg-white/5 backdrop-blur-md rounded-[2.5rem] p-10 border border-white/10 ${inView ? "animate-fade-in-up delay-200" : "opacity-0"}`}>
+            <h4 className="text-white text-xl font-bold mb-8 flex items-center gap-4">
+              <span className="w-2 h-2 bg-sage-500 rounded-full"></span>
+              อาจารย์ที่ปรึกษา
+            </h4>
+            <div className="space-y-6">
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5">
+                <div className="w-10 h-10 rounded-xl bg-sage-500/20 flex items-center justify-center text-sage-400">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M11.7 2.805a.75.75 0 0 1 .6 0l7.5 3.333a.75.75 0 0 1-.6 1.39l-7.2-3.2-7.2 3.2a.75.75 0 0 1-.6-1.39l7.5-3.333Z" /><path d="M6.457 8.525a.75.75 0 0 1 .491.704v5.44a4.125 4.125 0 0 0 8.25 0v-5.44a.75.75 0 0 1 1.242-.563l.35.311c.214.19.511.233.77.108l.38-.184a.75.75 0 0 1 .655 1.348l-.38.184c-.58.283-1.25.185-1.73-.243l-.045-.04v4.067c0 3.12-2.529 5.648-5.648 5.648-3.119 0-5.647-2.528-5.647-5.648v-4.067A4.125 4.125 0 0 0 2.25 12h1.5a2.625 2.625 0 0 1 2.707-3.475Z" /></svg>
+                </div>
+                <div>
+                  <p className="text-white font-bold">ผศ. ไกรมน มณีศิลป์</p>
+                  <p className="text-sage-500 text-sm">อาจารย์ที่ปรึกษาหลัก</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5">
+                <div className="w-10 h-10 rounded-xl bg-sage-500/20 flex items-center justify-center text-sage-400">
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M11.7 2.805a.75.75 0 0 1 .6 0l7.5 3.333a.75.75 0 0 1-.6 1.39l-7.2-3.2-7.2 3.2a.75.75 0 0 1-.6-1.39l7.5-3.333Z" /><path d="M6.457 8.525a.75.75 0 0 1 .491.704v5.44a4.125 4.125 0 0 0 8.25 0v-5.44a.75.75 0 0 1 1.242-.563l.35.311c.214.19.511.233.77.108l.38-.184a.75.75 0 0 1 .655 1.348l-.38.184c-.58.283-1.25.185-1.73-.243l-.045-.04v4.067c0 3.12-2.529 5.648-5.648 5.648-3.119 0-5.647-2.528-5.647-5.648v-4.067A4.125 4.125 0 0 0 2.25 12h1.5a2.625 2.625 0 0 1 2.707-3.475Z" /></svg>
+                </div>
+                <div>
+                  <p className="text-white font-bold">ผศ. พัฒน์นรี จันทราภิรมย์</p>
+                  <p className="text-sage-500 text-sm">อาจารย์ที่ปรึกษาร่วม</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* University Info */}
-          <p className="text-sm text-center">
+          {/* University */}
+          <div className={`bg-white/5 backdrop-blur-md rounded-[2.5rem] p-10 border border-white/10 flex flex-col justify-center ${inView ? "animate-fade-in-up delay-300" : "opacity-0"}`}>
+            <h4 className="text-white text-xl font-bold mb-8 flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl bg-sage-500/20 flex items-center justify-center text-sage-400 border border-white/5">
+                <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+                  <path d="M12 3L2 8V11H4V18H3V20H21V18H20V11H22V8L12 3M18 11V18H16V11H18M13 11V18H11V11H13M8 11V18H6V11H8M12 5L19 8.5L12 12L5 8.5L12 5Z" />
+                </svg>
+              </div>
+              สถาบันการศึกษา
+            </h4>
+            <div className="space-y-6">
+              <div>
+                <p className="text-sage-500 text-xs font-black uppercase tracking-widest mb-1 opacity-60">มหาวิทยาลัย</p>
+                <p className="text-white font-bold text-lg leading-tight">มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี</p>
+              </div>
+              <div>
+                <p className="text-sage-500 text-xs font-black uppercase tracking-widest mb-1 opacity-60">คณะ</p>
+                <p className="text-white font-bold text-lg leading-tight">วิทยาศาสตร์และเทคโนโลยี</p>
+              </div>
+              <div>
+                <p className="text-sage-500 text-xs font-black uppercase tracking-widest mb-1 opacity-60">สาขาวิชา</p>
+                <p className="text-white font-bold text-lg leading-tight">เทคโนโลยีสารสนเทศและการสื่อสารดิจิทัล</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 3. Tech Stack — Bottom Full Width */}
+        <div className={`mt-16 mb-4 ${inView ? "animate-fade-in-up delay-400" : "opacity-0"}`}>
+          <div className="flex flex-col items-center mb-6">
+            <div className="w-10 h-10 rounded-xl bg-sage-600/20 flex items-center justify-center text-sage-400 mb-3 border border-white/5">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 0 1 0 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 0 1 0-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281Z" />
+              </svg>
+            </div>
+            <h4 className="text-white text-lg font-bold">เครื่องมือที่ใช้พัฒนา</h4>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 max-w-2xl mx-auto">
+            {/* Flutter */}
+            <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-sage-500/30 transition-all text-center">
+              <div className="flex justify-center mb-2 transition-transform group-hover:scale-110">
+                <svg viewBox="0 0 24 24" className="w-9 h-9 text-[#54C5F8]" fill="currentColor">
+                  <path d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.357zm.014 11.072L7.857 17.53l6.47 6.47H21.7l-6.46-6.468 6.46-6.46h-7.37z" />
+                </svg>
+              </div>
+              <p className="text-white text-sm font-bold">Flutter</p>
+            </div>
+
+            {/* Java */}
+            <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-sage-500/30 transition-all text-center">
+              <div className="flex justify-center mb-2 transition-transform group-hover:scale-110">
+                <svg viewBox="0 0 24 24" className="w-9 h-9 text-[#E76F00]" fill="currentColor">
+                  <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.069-13.669.033-.856-.373.75-.89 1.254-.998.527-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0 0 .07-.062.09-.118M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.889 4.832 0 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.189-7.627" />
+                </svg>
+              </div>
+              <p className="text-white text-sm font-bold">Java Native</p>
+            </div>
+
+            {/* Firebase */}
+            <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-sage-500/30 transition-all text-center">
+              <div className="flex justify-center mb-2 transition-transform group-hover:scale-110">
+                <svg viewBox="0 0 24 24" className="w-9 h-9" fill="none">
+                  <path d="M3.89 15.673L6.255 1.618a.473.473 0 0 1 .885-.167l2.503 4.68-5.753 9.542z" fill="#FFC24A" />
+                  <path d="M9.456 8.462L3.89 15.673 6.255 1.618a.473.473 0 0 1 .885-.167l2.316 4.33v2.68z" fill="#FFA712" />
+                  <path d="M15.467 8.02l-1.386-1.508.025-.026L11.21 1.28a.48.48 0 0 0-.854.024L3.89 15.672l7.27 4.504a1.44 1.44 0 0 0 1.49.008l7.24-4.493-4.423-7.67z" fill="#F4BD62" />
+                  <path d="M15.467 8.02l-1.386-1.508-4.64 9.17 3.83 2.505a1.44 1.44 0 0 0 1.49.008l7.24-4.493-4.423-7.67-2.111 1.989z" fill="#FFA50E" />
+                  <path d="M15.542 20.158a1.44 1.44 0 0 1-1.49-.009l-7.233-4.477-.93 1.544 8.097 5.02a1.44 1.44 0 0 0 1.49-.008l7.24-4.494-.937-1.546-6.237 3.97z" fill="#F6820C" />
+                  <path d="M3.89 15.673l.07-.127.863-1.428 5.633-7.656L8.14 1.475a.473.473 0 0 0-.885.167L3.89 15.673z" fill="#FDE068" />
+                  <path d="M9.44 18.192l-.018-.034L3.89 15.674l-.93 1.543 6.446 3.993.037-.015-.003-3.003z" fill="#FCCA3F" />
+                  <path d="M15.542 20.158l6.237-3.97.937 1.546-7.24 4.494a1.44 1.44 0 0 1-1.49.008L6.96 17.216l.864-1.424 6.228 3.857a1.44 1.44 0 0 0 1.49.509z" fill="#EEAB37" />
+                </svg>
+              </div>
+              <p className="text-white text-sm font-bold">Firebase</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      {/* 4. Bottom Strip Footer Band */}
+      <div className={`mt-10 border-t border-white/5 bg-black/40 backdrop-blur-md pt-6 pb-6 ${inView ? "animate-fade-in delay-500" : "opacity-0"}`}>
+        <div className="max-w-6xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          {/* Left: Brand */}
+          <div className="flex items-center gap-3">
+            <img src="/assets/Kid_Guard.png" alt="KidGuard" className="w-8 h-8 rounded-lg opacity-80" />
+            <span className="text-sage-300/80 font-bold text-sm tracking-tight">KidGuard</span>
+          </div>
+
+          {/* Center: Project Info */}
+          <p className="text-sage-500/60 text-xs md:text-sm font-medium text-center">
             โปรเจกต์จบการศึกษา — มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี
           </p>
 
-          {/* Copyright */}
-          <p className="text-sm">
-            © {new Date().getFullYear()} KidGuard. สงวนลิขสิทธิ์
+          {/* Right: Copyright */}
+          <p className="text-sage-600/60 text-[10px] md:text-xs font-bold uppercase tracking-widest">
+            © 2026 KidGuard. สงวนลิขสิทธิ์
           </p>
         </div>
       </div>
@@ -1051,17 +1073,13 @@ function Footer() {
   );
 }
 
-/* ═══════════════════════════════════════════════════════
-   APP (Main)
-   ═══════════════════════════════════════════════════════ */
 export default function App() {
   return (
-    <div className="min-h-screen bg-sage-50">
+    <div className="min-h-screen">
       <Navbar />
       <Hero />
       <Features />
       <HowToUse />
-      <DownloadSection />
       <Footer />
     </div>
   );
