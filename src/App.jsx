@@ -359,6 +359,7 @@ function Navbar() {
   const links = [
     { href: "#features", label: "ฟีเจอร์" },
     { href: "#how-to-use", label: "วิธีใช้งาน" },
+    { href: "#installation", label: "คู่มือติดตั้ง APK" },
     { href: "#about-project", label: "เกี่ยวกับโปรเจค" },
   ];
 
@@ -386,12 +387,12 @@ function Navbar() {
         </a>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-6 lg:gap-8">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-sage-700 hover:text-sage-900 font-medium text-sm transition-all relative group"
+              className="text-sage-700 hover:text-sage-900 font-medium text-sm transition-all relative group whitespace-nowrap"
             >
               {l.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sage-500 transition-all duration-300 group-hover:w-full" />
@@ -712,7 +713,7 @@ function HowToUse() {
         </div>
 
         {/* ── Installation Guide Section ── */}
-        <div className={`mt-24 max-w-4xl mx-auto ${inView ? "animate-fade-in-up delay-600" : "opacity-0"}`}>
+        <div id="installation" className={`mt-24 w-full max-w-7xl mx-auto ${inView ? "animate-fade-in-up delay-600" : "opacity-0"}`}>
           {/* Section Header */}
           <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 bg-amber-50 px-5 py-2.5 rounded-full text-[11px] font-bold tracking-widest uppercase text-amber-600 border border-amber-100 mb-6">
@@ -721,7 +722,7 @@ function HowToUse() {
               </svg>
               สำคัญ — อ่านก่อนติดตั้ง
             </div>
-            <h3 className="text-3xl sm:text-4xl font-black text-sage-950 mb-4">
+            <h3 className="text-3xl sm:text-4xl font-black text-sage-950 mb-4 whitespace-nowrap">
               คู่มือติดตั้ง APK
             </h3>
             <p className="text-sage-500 text-lg font-medium max-w-xl mx-auto leading-relaxed">
@@ -729,102 +730,104 @@ function HowToUse() {
             </p>
           </div>
 
-          {/* Card 1: Allow Unknown Sources */}
-          <div className="bg-white rounded-[2.5rem] p-6 sm:p-10 border border-sage-100 shadow-premium mb-8">
-            {/* Card Header */}
-            <div className="flex items-center gap-4 sm:gap-5 mb-8 pb-6 border-b border-sage-100">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center flex-shrink-0 text-white shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-7 h-7 sm:w-8 sm:h-8">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.623 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                </svg>
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+            {/* Card 1: Allow Unknown Sources */}
+            <div className="bg-white rounded-[2.5rem] p-6 sm:p-10 border border-sage-100 shadow-premium">
+              {/* Card Header */}
+              <div className="flex items-center gap-4 sm:gap-5 mb-8 pb-6 border-b border-sage-100">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-500 flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-7 h-7 sm:w-8 sm:h-8">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.623 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-xl sm:text-2xl font-black text-sage-900 leading-tight">อนุญาตติดตั้งจากแหล่งที่ไม่รู้จัก</h4>
+                  <p className="text-sage-400 text-sm font-medium mt-1">ขั้นตอนเปิดสิทธิ์ติดตั้งไฟล์ APK</p>
+                </div>
               </div>
-              <div>
-                <h4 className="text-xl sm:text-2xl font-black text-sage-900 leading-tight">อนุญาตติดตั้งจากแหล่งที่ไม่รู้จัก</h4>
-                <p className="text-sage-400 text-sm font-medium mt-1">ขั้นตอนเปิดสิทธิ์ติดตั้งไฟล์ APK</p>
+
+              {/* Steps */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-sage-50/80 border border-sage-100/60 hover:bg-white hover:shadow-sm transition-all group">
+                  <div className="w-9 h-9 rounded-xl bg-sage-900 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">1</div>
+                  <p className="text-sage-700 font-medium text-[15px]">เปิด <strong className="text-sage-900">ตั้งค่า (Settings)</strong> บนมือถือ</p>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-sage-50/80 border border-sage-100/60 hover:bg-white hover:shadow-sm transition-all group">
+                  <div className="w-9 h-9 rounded-xl bg-sage-900 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">2</div>
+                  <p className="text-sage-700 font-medium text-[15px]">ไปที่ <strong className="text-sage-900">แอป & การแจ้งเตือน</strong> หรือ <strong className="text-sage-900">ความปลอดภัย</strong> (แล้วแต่ยี่ห้อมือถือ)</p>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-sage-50/80 border border-sage-100/60 hover:bg-white hover:shadow-sm transition-all group">
+                  <div className="w-9 h-9 rounded-xl bg-sage-900 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">3</div>
+                  <p className="text-sage-700 font-medium text-[15px]">เลือก <strong className="text-sage-900">การเข้าถึงพิเศษ</strong> → <strong className="text-sage-900">ติดตั้งแอปที่ไม่รู้จัก</strong></p>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-sage-50/80 border border-sage-100/60 hover:bg-white hover:shadow-sm transition-all group">
+                  <div className="w-9 h-9 rounded-xl bg-sage-900 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">4</div>
+                  <p className="text-sage-700 font-medium text-[15px]">เลือกแอปที่ใช้ดาวน์โหลด (เช่น <strong className="text-sage-900">Chrome</strong> หรือ <strong className="text-sage-900">Files</strong>) แล้วเปิด <strong className="text-sage-900">"อนุญาตจากแหล่งนี้"</strong></p>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-sage-50/80 border border-sage-100/60 hover:bg-white hover:shadow-sm transition-all group">
+                  <div className="w-9 h-9 rounded-xl bg-sage-900 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">5</div>
+                  <p className="text-sage-700 font-medium text-[15px]">กลับไปเปิดไฟล์ <strong className="text-sage-900">KidGuard.apk</strong> ที่ดาวน์โหลดมา แล้วกด <strong className="text-sage-900">"ติดตั้ง"</strong></p>
+                </div>
+              </div>
+
+              {/* Quick Tip */}
+              <div className="mt-6 bg-sage-50 rounded-2xl p-4 sm:p-5 border border-sage-100 flex items-start gap-3">
+                <span className="text-lg flex-shrink-0 mt-0.5">💡</span>
+                <p className="text-sage-600 text-sm font-medium leading-relaxed">
+                  <strong className="text-sage-800">เคล็ดลับ:</strong> เมนูอาจแตกต่างกันไปตามยี่ห้อมือถือ หากหาไม่เจอให้ลองค้นหาคำว่า <strong className="text-sage-800">"ติดตั้งแอปที่ไม่รู้จัก"</strong> ในช่องค้นหาของตั้งค่า
+                </p>
               </div>
             </div>
 
-            {/* Steps */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-sage-50/80 border border-sage-100/60 hover:bg-white hover:shadow-sm transition-all group">
-                <div className="w-9 h-9 rounded-xl bg-sage-900 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">1</div>
-                <p className="text-sage-700 font-medium text-[15px]">เปิด <strong className="text-sage-900">ตั้งค่า (Settings)</strong> บนมือถือ</p>
+            {/* Card 2: Disable Google Play Protect */}
+            <div className="bg-white rounded-[2.5rem] p-6 sm:p-10 border border-sage-100 shadow-premium">
+              {/* Card Header */}
+              <div className="flex items-center gap-4 sm:gap-5 mb-6 pb-6 border-b border-sage-100">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center flex-shrink-0 text-white shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 sm:w-8 sm:h-8">
+                    <path fillRule="evenodd" d="M12.516 2.17a.75.75 0 0 0-1.032 0 11.209 11.209 0 0 1-7.877 3.08.75.75 0 0 0-.722.515A12.74 12.74 0 0 0 2.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 0 0 .374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 0 0-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08Zm3.094 8.016a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-xl sm:text-2xl font-black text-sage-900 leading-tight">ปิด Google Play Protect <span className="text-sm font-bold text-blue-500">(ชั่วคราว)</span></h4>
+                  <p className="text-sage-400 text-sm font-medium mt-1">หากติดตั้งแล้วขึ้นคำเตือน "แอปนี้อาจเป็นอันตราย"</p>
+                </div>
               </div>
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-sage-50/80 border border-sage-100/60 hover:bg-white hover:shadow-sm transition-all group">
-                <div className="w-9 h-9 rounded-xl bg-sage-900 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">2</div>
-                <p className="text-sage-700 font-medium text-[15px]">ไปที่ <strong className="text-sage-900">แอป & การแจ้งเตือน</strong> หรือ <strong className="text-sage-900">ความปลอดภัย</strong> (แล้วแต่ยี่ห้อมือถือ)</p>
-              </div>
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-sage-50/80 border border-sage-100/60 hover:bg-white hover:shadow-sm transition-all group">
-                <div className="w-9 h-9 rounded-xl bg-sage-900 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">3</div>
-                <p className="text-sage-700 font-medium text-[15px]">เลือก <strong className="text-sage-900">การเข้าถึงพิเศษ</strong> → <strong className="text-sage-900">ติดตั้งแอปที่ไม่รู้จัก</strong></p>
-              </div>
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-sage-50/80 border border-sage-100/60 hover:bg-white hover:shadow-sm transition-all group">
-                <div className="w-9 h-9 rounded-xl bg-sage-900 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">4</div>
-                <p className="text-sage-700 font-medium text-[15px]">เลือกแอปที่ใช้ดาวน์โหลด (เช่น <strong className="text-sage-900">Chrome</strong> หรือ <strong className="text-sage-900">Files</strong>) แล้วเปิด <strong className="text-sage-900">"อนุญาตจากแหล่งนี้"</strong></p>
-              </div>
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-sage-50/80 border border-sage-100/60 hover:bg-white hover:shadow-sm transition-all group">
-                <div className="w-9 h-9 rounded-xl bg-sage-900 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">5</div>
-                <p className="text-sage-700 font-medium text-[15px]">กลับไปเปิดไฟล์ <strong className="text-sage-900">KidGuard.apk</strong> ที่ดาวน์โหลดมา แล้วกด <strong className="text-sage-900">"ติดตั้ง"</strong></p>
-              </div>
-            </div>
 
-            {/* Quick Tip */}
-            <div className="mt-6 bg-sage-50 rounded-2xl p-4 sm:p-5 border border-sage-100 flex items-start gap-3">
-              <span className="text-lg flex-shrink-0 mt-0.5">💡</span>
-              <p className="text-sage-600 text-sm font-medium leading-relaxed">
-                <strong className="text-sage-800">เคล็ดลับ:</strong> เมนูอาจแตกต่างกันไปตามยี่ห้อมือถือ หากหาไม่เจอให้ลองค้นหาคำว่า <strong className="text-sage-800">"ติดตั้งแอปที่ไม่รู้จัก"</strong> ในช่องค้นหาของตั้งค่า
-              </p>
-            </div>
-          </div>
+              {/* Info Banner */}
+              <div className="bg-blue-50 rounded-2xl p-4 sm:p-5 border border-blue-100 mb-6 flex items-start gap-3">
+                <span className="text-lg flex-shrink-0 mt-0.5">ℹ️</span>
+                <p className="text-blue-700 text-sm font-medium leading-relaxed">
+                  Google Play Protect อาจบล็อกการติดตั้งแอปที่ไม่ได้มาจาก Play Store เนื่องจากแอปยังอยู่ในขั้นตอนพัฒนาจึงยังไม่ได้ลงทะเบียน — <strong>ติดตั้งเสร็จแล้วเปิด Play Protect กลับได้เลย</strong>
+                </p>
+              </div>
 
-          {/* Card 2: Disable Google Play Protect */}
-          <div className="bg-white rounded-[2.5rem] p-6 sm:p-10 border border-sage-100 shadow-premium">
-            {/* Card Header */}
-            <div className="flex items-center gap-4 sm:gap-5 mb-6 pb-6 border-b border-sage-100">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center flex-shrink-0 text-white shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7 sm:w-8 sm:h-8">
-                  <path fillRule="evenodd" d="M12.516 2.17a.75.75 0 0 0-1.032 0 11.209 11.209 0 0 1-7.877 3.08.75.75 0 0 0-.722.515A12.74 12.74 0 0 0 2.25 9.75c0 5.942 4.064 10.933 9.563 12.348a.749.749 0 0 0 .374 0c5.499-1.415 9.563-6.406 9.563-12.348 0-1.39-.223-2.73-.635-3.985a.75.75 0 0 0-.722-.516l-.143.001c-2.996 0-5.717-1.17-7.734-3.08Zm3.094 8.016a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div>
-                <h4 className="text-xl sm:text-2xl font-black text-sage-900 leading-tight">ปิด Google Play Protect <span className="text-sm font-bold text-blue-500">(ชั่วคราว)</span></h4>
-                <p className="text-sage-400 text-sm font-medium mt-1">หากติดตั้งแล้วขึ้นคำเตือน "แอปนี้อาจเป็นอันตราย"</p>
-              </div>
-            </div>
-
-            {/* Info Banner */}
-            <div className="bg-blue-50 rounded-2xl p-4 sm:p-5 border border-blue-100 mb-6 flex items-start gap-3">
-              <span className="text-lg flex-shrink-0 mt-0.5">ℹ️</span>
-              <p className="text-blue-700 text-sm font-medium leading-relaxed">
-                Google Play Protect อาจบล็อกการติดตั้งแอปที่ไม่ได้มาจาก Play Store เนื่องจากแอปยังอยู่ในขั้นตอนพัฒนาจึงยังไม่ได้ลงทะเบียน — <strong>ติดตั้งเสร็จแล้วเปิด Play Protect กลับได้เลย</strong>
-              </p>
-            </div>
-
-            {/* Steps */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-blue-50/50 border border-blue-100/40 hover:bg-white hover:shadow-sm transition-all group">
-                <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">1</div>
-                <p className="text-sage-700 font-medium text-[15px]">เปิดแอป <strong className="text-sage-900">Google Play Store</strong> บนมือถือ</p>
-              </div>
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-blue-50/50 border border-blue-100/40 hover:bg-white hover:shadow-sm transition-all group">
-                <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">2</div>
-                <p className="text-sage-700 font-medium text-[15px]">แตะ <strong className="text-sage-900">รูปโปรไฟล์</strong> ที่มุมขวาบน → เลือก <strong className="text-sage-900">Play Protect</strong></p>
-              </div>
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-blue-50/50 border border-blue-100/40 hover:bg-white hover:shadow-sm transition-all group">
-                <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">3</div>
-                <p className="text-sage-700 font-medium text-[15px]">แตะ <strong className="text-sage-900">ไอคอนรูปเฟือง ⚙️</strong> ที่มุมขวาบน</p>
-              </div>
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-blue-50/50 border border-blue-100/40 hover:bg-white hover:shadow-sm transition-all group">
-                <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">4</div>
-                <p className="text-sage-700 font-medium text-[15px]">ปิดสวิตช์ <strong className="text-red-600">"สแกนแอปด้วย Play Protect"</strong> แล้วกดยืนยัน</p>
-              </div>
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-blue-50/50 border border-blue-100/40 hover:bg-white hover:shadow-sm transition-all group">
-                <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">5</div>
-                <p className="text-sage-700 font-medium text-[15px]">กลับไป <strong className="text-sage-900">ติดตั้ง KidGuard.apk</strong> ได้ตามปกติ</p>
-              </div>
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-100 group">
-                <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0">✓</div>
-                <p className="text-emerald-800 font-semibold text-[15px]">หลังติดตั้งเสร็จ → กลับไปเปิด Play Protect เหมือนเดิม เพื่อความปลอดภัย</p>
+              {/* Steps */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-blue-50/50 border border-blue-100/40 hover:bg-white hover:shadow-sm transition-all group">
+                  <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">1</div>
+                  <p className="text-sage-700 font-medium text-[15px]">เปิดแอป <strong className="text-sage-900">Google Play Store</strong> บนมือถือ</p>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-blue-50/50 border border-blue-100/40 hover:bg-white hover:shadow-sm transition-all group">
+                  <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">2</div>
+                  <p className="text-sage-700 font-medium text-[15px]">แตะ <strong className="text-sage-900">รูปโปรไฟล์</strong> ที่มุมขวาบน → เลือก <strong className="text-sage-900">Play Protect</strong></p>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-blue-50/50 border border-blue-100/40 hover:bg-white hover:shadow-sm transition-all group">
+                  <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">3</div>
+                  <p className="text-sage-700 font-medium text-[15px]">แตะ <strong className="text-sage-900">ไอคอนรูปเฟือง ⚙️</strong> ที่มุมขวาบน</p>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-blue-50/50 border border-blue-100/40 hover:bg-white hover:shadow-sm transition-all group">
+                  <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">4</div>
+                  <p className="text-sage-700 font-medium text-[15px]">ปิดสวิตช์ <strong className="text-red-600">"สแกนแอปด้วย Play Protect"</strong> แล้วกดยืนยัน</p>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-blue-50/50 border border-blue-100/40 hover:bg-white hover:shadow-sm transition-all group">
+                  <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0 group-hover:scale-110 transition-transform">5</div>
+                  <p className="text-sage-700 font-medium text-[15px]">กลับไป <strong className="text-sage-900">ติดตั้ง KidGuard.apk</strong> ได้ตามปกติ</p>
+                </div>
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-100 group">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-black text-sm flex-shrink-0">✓</div>
+                  <p className="text-emerald-800 font-semibold text-[15px]">หลังติดตั้งเสร็จ → กลับไปเปิด Play Protect เหมือนเดิม เพื่อความปลอดภัย</p>
+                </div>
               </div>
             </div>
           </div>
@@ -981,7 +984,7 @@ function Footer() {
                   name: "นางสาว ปัณฑารีย์ ภูมิพลับ",
                   img: "/assets/1.jpg",
                   role: "UI/UX & จัดทำรายงาน",
-                  social: { github: "https://github.com/panthareepmp" },
+                  social: { github: "https://github.com/Pumpam02" },
                   details: {
                     major: "สาขาเทคโนโลยีคอมพิวเตอร์",
                     studentId: "116510906072-3",
