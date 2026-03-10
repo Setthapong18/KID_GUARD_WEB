@@ -400,7 +400,7 @@ function Navbar() {
           ))}
           <a
             href="/KidGuard.apk"
-            download
+            download="KidGuard.apk"
             className="relative overflow-hidden group bg-sage-800 text-white px-6 py-2.5 rounded-2xl text-sm font-semibold transition-all hover:bg-sage-900 hover:shadow-sage-glow hover:-translate-y-0.5"
           >
             <span className="relative z-10">ดาวน์โหลด</span>
@@ -442,7 +442,7 @@ function Navbar() {
             ))}
             <a
               href="/KidGuard.apk"
-              download
+              download="KidGuard.apk"
               onClick={() => setMobileOpen(false)}
               className="mt-2 text-center bg-sage-800 text-white py-4 rounded-2xl font-bold shadow-lg"
             >
@@ -496,7 +496,7 @@ function Hero() {
           <div className="animate-fade-in-up delay-300 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
             <a
               href="/KidGuard.apk"
-              download
+              download="KidGuard.apk"
               className="group relative overflow-hidden bg-sage-800 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-[2rem] text-lg sm:text-xl font-bold transition-all shadow-premium hover:shadow-sage-glow hover:-translate-y-1"
             >
               <div className="relative z-10 flex items-center gap-3">
